@@ -37,7 +37,7 @@ public class Welcome_Screen extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        },10000);
+        },1000);
     }
 
 }

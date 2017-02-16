@@ -12,7 +12,7 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        Intent newGameIntent = new Intent(MainMenu.this,Welcome_Screen.class);
+        Intent newGameIntent = new Intent(MainMenu.this,GameScreen.class);
         OnButtonClick(R.id.button,newGameIntent);
 
     }
