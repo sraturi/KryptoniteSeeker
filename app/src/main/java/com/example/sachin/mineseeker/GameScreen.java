@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
@@ -22,7 +23,7 @@ public class GameScreen extends AppCompatActivity {
     private static final int NUMS_COL =3 ;
     private  int NumberOfMinesRevealed = 0;
     private static MineSeeker minesSeeker = new MineSeeker(NUMS_ROW,NUMS_COL);
-    Random rand = new Random(0);
+
 
 
     @Override
@@ -30,6 +31,7 @@ public class GameScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
         populateButtons();
+
     }
 
 

@@ -13,17 +13,20 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         Intent newGameIntent = new Intent(MainMenu.this,GameScreen.class);
-        OnButtonClick(R.id.button,newGameIntent);
+        Intent optionIntent = new Intent(MainMenu.this,OptionMenu.class);
+        OnButtonClick(R.id.newGameButton,newGameIntent);
+        OnButtonClick(R.id.optionButton,optionIntent);
 
     }
 
-    private void OnButtonClick(int buttonId, final Intent intent) {
+    private void OnButtonClick(final int buttonId, final Intent intent) {
         Button button = (Button) findViewById(buttonId);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(intent);
-                finish();
+                if(buttonId == R.id.newGameButton)
+                    finish();
             }
         });
     }

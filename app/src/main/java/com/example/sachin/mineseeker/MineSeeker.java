@@ -1,8 +1,10 @@
 package com.example.sachin.mineseeker;
 
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Button;
 
+import java.sql.Time;
 import java.util.Random;
 
 /**
@@ -17,11 +19,11 @@ import java.util.Random;
 
 public class MineSeeker {
     private static Button Mines[][];
-    private static int rows = 0;
-    private static int cols = 0;
+    private  int rows = 0;
+    private  int cols = 0;
     private static int numberOfMines = 0;
     private static int dummyArray[][];
-    Random rand = new Random();
+    Random rand = new Random(System.nanoTime());
     public MineSeeker(){
         rows = 5;
         cols = 5;
@@ -46,8 +48,10 @@ public class MineSeeker {
         numberOfMines =0;
         Mines = new Button[rows][cols];
         dummyArray = new int[row][col];
+        Random rand = new Random();
         for(int i =0;i<getRows();i++){
             for (int j = 0;j<getCols();j++){
+
                 int x = rand.nextInt(2);
                 Log.i("num",x+"");
                 if(x==1){
@@ -69,8 +73,8 @@ public class MineSeeker {
         return numberOfMines;
     }
 
-    public  void setCols(int cols) {
-        MineSeeker.cols = cols;
+    public  void setCols(int col) {
+        cols = col;
     }
 
     public  void setRows(int row) {
