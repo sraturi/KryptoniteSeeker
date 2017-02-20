@@ -1,5 +1,6 @@
 package com.example.sachin.mineseeker;
 
+import android.content.Context;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Button;
@@ -24,23 +25,52 @@ public class MineSeeker {
     private static int numberOfMines = 0;
     private static int dummyArray[][];
     Random rand = new Random(System.nanoTime());
+
     public MineSeeker(){
-        rows = 5;
-        cols = 5;
+       int size = MainMenu.size;
+        int maxNumMines = MainMenu.numMines;
+        if(size == 4){
+            rows = 4;
+            cols = 6;
+        }
+        else if(size == 5){
+            rows = 5;
+            cols = 10;
+        }
+        else if (size == 6){
+            rows = 6;
+            cols = 15;
+        }
+        else {
+            rows = 5;
+            cols = 5;
+        }
         numberOfMines = 0;
         Mines = new Button[rows][cols];
         dummyArray = new int[rows][cols];
-        for(int i =0;i<getRows();i++){
-            for (int j = 0;j<getCols();j++){
-                int x = rand.nextInt(2);
-                if(x==1){
-                    numberOfMines++;
-                }
-                Log.i("num",x+"");
-                dummyArray[i][j] = x;
-            }
-            Log.i("total",numberOfMines+"");
-        }
+           for (int i = 0; i < getRows(); i++) {
+               for (int j = 0; j < getCols(); j++) {
+                   int x = 0;
+                   if (size == 4)
+                       x = rand.nextInt(2);
+                   else if (size == 5)
+                       x = rand.nextInt(size/2);
+                   else {
+                       x = rand.nextInt(size-2);
+                   }
+                   if (x == 1 && (numberOfMines < maxNumMines)) {
+                       numberOfMines++;
+
+                       Log.i("num", x + "");
+                       dummyArray[i][j] = x;
+                   } else {
+                       dummyArray[i][j] = 0;
+                   }
+               }
+               Log.i("total", numberOfMines + "");
+           }
+
+
     }
     public MineSeeker(int row,int col){
         rows = row;

@@ -1,5 +1,6 @@
 package com.example.sachin.mineseeker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -19,43 +20,40 @@ import java.util.Random;
 
 public class GameScreen extends AppCompatActivity {
 
-    private static final int NUMS_ROW = 3;
-    private static final int NUMS_COL =3 ;
     private  int NumberOfMinesRevealed = 0;
-    private static MineSeeker minesSeeker = new MineSeeker(NUMS_ROW,NUMS_COL);
 
-
+    private MineSeeker minesSeeker = new MineSeeker();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
         populateButtons();
-
     }
-
 
 
     private void populateButtons() {
         TableLayout buttonTable = (TableLayout) findViewById(R.id.buttonTable);
 
-        for(int rows = 0; rows<NUMS_ROW;rows++){
+        for(int rows = 0; rows<minesSeeker.getRows();rows++){
             final int currentRow = rows;
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
                     TableLayout.LayoutParams.MATCH_PARENT,1.0f));
             buttonTable.addView(tableRow);
-            for(int cols = 0;cols<NUMS_COL;cols++) {
+            for(int cols = 0;cols<minesSeeker.getCols();cols++) {
                 final Button button = new Button(this);
                 final int currentCol = cols;
                 button.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT, 1.0f));
 
                 if(minesSeeker.getDummyMine(rows,cols) == 0){
-                    //button.setText("" + rows + "" + cols);
+                    button.setBackgroundResource(R.drawable.grass);
                 }
                 else {
+                    button.setBackgroundResource(R.drawable.grass);
                     button.setText("Mine");
+
                 }
                 button.setPadding(0, 0, 0, 0);
                 button.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +67,7 @@ public class GameScreen extends AppCompatActivity {
                             NumberOfMinesRevealed++;
                             if(NumberOfMinesRevealed ==minesSeeker.getNumberOfMines()){
                                 Intent intent = new Intent(GameScreen.this,MainMenu.class);
-                                startActivity(intent);
+                            //    startActivity(intent);
                                 finish();
                             }
                         }
@@ -92,8 +90,8 @@ public class GameScreen extends AppCompatActivity {
         }
     }
     private void lockButtonSizes () {
-        for (int row = 0; row != NUMS_ROW; row++) {
-            for (int col = 0; col != NUMS_COL; col++) {
+        for (int row = 0; row != minesSeeker.getRows(); row++) {
+            for (int col = 0; col != minesSeeker.getCols(); col++) {
                 Button button = minesSeeker.getMines(row,col);
                 int width = button.getWidth();
                 button.setMinWidth(width);
@@ -107,7 +105,7 @@ public class GameScreen extends AppCompatActivity {
     private void setButtonSizeAndImage(Button button){
         int newWidth = button.getWidth();
         int newHeight = button.getHeight();
-        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.shutterstock_82439548);
+        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mine);
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
         Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
