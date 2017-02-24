@@ -4,7 +4,12 @@
 android:duration="1"
     android:fromYDelta="-2000"
     android:toYDelta="0"
-
-
     />
+    <rotate
+        android:fromDegrees="0.0"
+        android:toDegrees="360"
+        android:pivotX="50"
+        android:pivotY="50"
+        />
+
 </set>

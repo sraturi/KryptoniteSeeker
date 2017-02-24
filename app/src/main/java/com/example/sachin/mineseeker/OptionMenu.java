@@ -27,7 +27,7 @@ public class OptionMenu extends AppCompatActivity {
         for (int i =0; i<sizeList.length;i++) {
         RadioButton rButton = new RadioButton(this);
             final int numMines = sizeList[i];
-        rButton.setText(sizeList[i]+ " Mines");
+        rButton.setText(sizeList[i]+ " Cell");
             rButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

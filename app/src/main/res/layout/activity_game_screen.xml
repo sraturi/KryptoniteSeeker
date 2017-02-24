@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@android:color/darker_gray"
+    android:background="@drawable/grass_background"
     tools:context="com.example.sachin.mineseeker.GameScreen">
 
     <TableLayout
@@ -18,8 +18,7 @@
         android:layout_width="match_parent"
 
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_above="@+id/numMinesFound">
 
             </TableLayout>
 
@@ -27,8 +26,24 @@
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView4"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="104dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="32dp"
+        android:id="@+id/numMinesFound"
+        android:textStyle="normal|bold"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalNumScans"
+        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@+id/numMinesFound"
+        android:textStyle="normal|bold"
+        android:textColor="@color/colorAccent" />
+
 </RelativeLayout>

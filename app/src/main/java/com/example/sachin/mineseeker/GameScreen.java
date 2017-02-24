@@ -1,27 +1,26 @@
 package com.example.sachin.mineseeker;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.Random;
+
+import static android.R.attr.button;
 
 public class GameScreen extends AppCompatActivity {
 
     private  int NumberOfMinesRevealed = 0;
-
+    private int totalNumberOfScans = 0;
     private MineSeeker minesSeeker = new MineSeeker();
 
     @Override
@@ -29,7 +28,21 @@ public class GameScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
         populateButtons();
+        setupTotalScans();
+        setupMinesFound();
     }
+
+    private void setupMinesFound() {
+        TextView totalMines = (TextView) findViewById(R.id.numMinesFound);
+        totalMines.setText("Mines Found "+ NumberOfMinesRevealed+"/" +minesSeeker.getNumberOfMines());
+
+    }
+
+    private void setupTotalScans() {
+        TextView totalNumScans = (TextView) findViewById(R.id.totalNumScans);
+        totalNumScans.setText("Number Of Scans: "+ totalNumberOfScans+"");
+    }
+
 
 
     private void populateButtons() {
@@ -47,13 +60,8 @@ public class GameScreen extends AppCompatActivity {
                 button.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT, 1.0f));
 
-                if(minesSeeker.getDummyMine(rows,cols) == 0){
-                    button.setBackgroundResource(R.drawable.grass);
-                }
-                else {
-                    button.setBackgroundResource(R.drawable.grass);
-                    button.setText("Mine");
-
+                if(minesSeeker.getMineCellArray(rows,cols).getCellNumber() == 1){
+                    minesSeeker.getMineCellArray(rows,cols).setIsMine(true);
                 }
                 button.setPadding(0, 0, 0, 0);
                 button.setOnClickListener(new View.OnClickListener() {
@@ -62,27 +70,38 @@ public class GameScreen extends AppCompatActivity {
                     public void onClick(View v) {
                         Random rand = new Random();
                         lockButtonSizes();
-                        if(button.getText().equals("Mine")) {
-                            setButtonSizeAndImage(button);
-                            NumberOfMinesRevealed++;
+                        if(minesSeeker.getMineCellArray(currentRow,currentCol).isMine()) {
+                            if(minesSeeker.getMineCellArray(currentRow,currentCol).isMineHidden()) {
+                                setButtonSizeAndImage(button);
+                                NumberOfMinesRevealed++;
+                                setupMinesFound();
+                                minesSeeker.getMineCellArray(currentRow,currentCol).setIsMineHidden(false);
+                                resetbutton(currentRow,currentCol);
+                            }
                             if(NumberOfMinesRevealed ==minesSeeker.getNumberOfMines()){
-                                Intent intent = new Intent(GameScreen.this,MainMenu.class);
-                            //    startActivity(intent);
-                                finish();
+                              setupWinScreen();
                             }
-                        }
-                        else {
-                            if(rand.nextBoolean())
-                            button.setText(minesSeeker.getTotalMinesInCol(currentCol)+"");
-                            else{
-                                button.setText(minesSeeker.getTotalMinesInRow(currentRow)+"");
+                            if(minesSeeker.getMineCellArray(currentRow,currentCol).isMineRevealed()){
+                                totalNumberOfScans++;
+                                setupTotalScans();
+
+                            }
+                            else {
+                                minesSeeker.getMineCellArray(currentRow,currentCol).setIsMineRevealed(true);
+
                             }
                         }
 
+                        else if(!minesSeeker.getMineCellArray(currentRow,currentCol).isReavled()) {
+                            totalNumberOfScans++;
+                            setupTotalScans();
+                            int totalMinesInColRow = minesSeeker.getTotalMinesInCol(currentCol) +
+                                    minesSeeker.getTotalMinesInRow(currentRow);
+                            button.setText(totalMinesInColRow+"");
+                        minesSeeker.getMineCellArray(currentRow,currentCol).setReavled(true);
+                        }
                     }
-
                 });
-
             tableRow.addView(button);
            minesSeeker.setMines(rows,cols,button);
             }
@@ -110,4 +129,32 @@ public class GameScreen extends AppCompatActivity {
         Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
     }
+    private void setupWinScreen(){
+        FragmentManager manager = getSupportFragmentManager();
+        WinScreen winScreen = new WinScreen();
+        winScreen.show(manager,"winScreen");
+    }
+private void resetbutton(int row, int col){
+
+    for(int i = 0; i <minesSeeker.getRows();i++){
+        for(int j = col;j==col;j++){
+            int k = 0;
+            if(!minesSeeker.getMines(i,j).getText().toString().equals("")){
+                k = Integer.parseInt(minesSeeker.getMines(i,j).getText().toString())-1;
+                minesSeeker.getMines(i,j).setText(k+"");
+            }
+        }
+    }
+
+    for(int i = 0; i <minesSeeker.getCols();i++){
+        for(int j = row;j==row;j++){
+            int k = 0;
+            if(!(minesSeeker.getMines(j,i).getText().toString().equals(""))){
+                k = Integer.parseInt(minesSeeker.getMines(j,i).getText().toString())-1;
+                minesSeeker.getMines(j,i).setText(k+"");
+            }
+        }
+    }
 }
+}
+
