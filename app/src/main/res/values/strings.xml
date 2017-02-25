@@ -1,7 +1,19 @@
 <resources>
-    <string name="app_name">MineSeeker</string>
+    <string name="app_name">Kryptonite Seeker</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="gameObjective">GAME OBJECTIVE</string>
+    <string name="gameObjectiveValue">Superman has gone rogue! It is up to BATMAN to stop SuperMan. However he needs your help finding the Kryptonite first!!</string>
+    <string name="GameInstructions">Clicking on a Cell will either reveal Krytonite or a number that states the number of kryptonite in the row and column.</string>
+    <string name="GameInstruction2">Find all the Kryptonite with as few scans as Possible.</string>
+    <string name="gameInstruction">Game Instructions</string>
+    <string name="back">BACK</string>
+    <string name="resourses">RESOURCES</string>
+    <string name="r1">bvs : http://www.movementmagazine.com/comics/batman-vs-superman-comics/</string>
+    <string name="r2">Gameplay Background: http://wallpapercave.com/w/snMo49e/</string>
+    <string name="r3">Kryptonite: http://www.free-icons-download.net/green-gem-icon-14292/</string>
+    <string name="r4">Batman Logo:  https://in.pinterest.com/explore/batman-logo-png/</string>
+    <string name="ok">OK</string>
 </resources>

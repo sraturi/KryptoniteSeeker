@@ -1,6 +1,5 @@
 package com.example.sachin.mineseeker;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -9,16 +8,16 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainMenu extends AppCompatActivity {
-    public static int size = 0;
-    public static int numMines = 0;
+    public static int gameSize = 0;
+    public static int totalNumKryptonite = 0;
     public static int numGamesPlayed = 0;
 
     private void getNumberOfMines() {
-        numMines = OptionMenu.getNumMInes(this);
+        totalNumKryptonite = OptionMenu.getNumMInes(this);
     }
 
     private void getSize() {
-        size = OptionMenu.getSize(this);
+        gameSize = OptionMenu.getSize(this);
 
     }
 
@@ -28,8 +27,10 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         Intent newGameIntent = new Intent(MainMenu.this, GameScreen.class);
         Intent optionIntent = OptionMenu.makeIntent(this);
+        Intent helpIntent = new Intent(MainMenu.this, HelpScreen.class);
         OnButtonClick(R.id.newGameButton, newGameIntent);
         OnButtonClick(R.id.optionButton, optionIntent);
+        OnButtonClick(R.id.helpButton,helpIntent);
         getSize();
         getNumberOfMines();
         numGamesPlayed = getNumGamesPlayed();

@@ -24,18 +24,18 @@ public class MineSeeker {
     private static Cell MineCellArray[][];
     Random rand = new Random(System.nanoTime());
 
-    public MineSeeker(){
-       int size = MainMenu.size;
-        int maxNumMines = MainMenu.numMines;
-        if(size == 4){
+    public MineSeeker(int gameSize, int numMines){
+       int boardSize = gameSize;
+        int maxNumMines = numMines;
+        if(boardSize == 4){
             rows = 4;
             cols = 6;
         }
-        else if(size == 5){
+        else if(boardSize == 5){
             rows = 5;
             cols = 10;
         }
-        else if (size == 6){
+        else if (boardSize == 6){
             rows = 6;
             cols = 15;
         }
@@ -51,12 +51,45 @@ public class MineSeeker {
                    Cell mine = new Cell();
                    MineCellArray[i][j] = mine;
                    int x = NOT_MINE;
-                   if (size == 4)
-                       x = rand.nextInt(2);
-                   else if (size == 5)
-                       x = rand.nextInt(size/2);
+                   if (boardSize == 4){
+                       if (maxNumMines == 6)
+                           x = rand.nextInt(boardSize);
+                       else if (maxNumMines == 10) {
+                           x = rand.nextInt(boardSize-2);
+                       } else if (maxNumMines == 15) {
+                           x = rand.nextInt(2);
+                           if(numberOfMines <maxNumMines && ((getRows()-i == 1)||(getRows()-i==2))){
+                               x = MINE;
+                           }
+                       } else if (maxNumMines == 20) {
+                           x = rand.nextInt(2);
+                           if(numberOfMines <maxNumMines && ((getRows()-i == 1)||(getRows()-i==2))){
+                               x = MINE;
+                           }
+                       }
+                   }
+
+                   else if (boardSize == 5) {
+                       if (maxNumMines == 6)
+                           x = rand.nextInt(boardSize+2);
+                       else if (maxNumMines == 10) {
+                           x = rand.nextInt(boardSize-1);
+                       } else if (maxNumMines == 15) {
+                           x = rand.nextInt(boardSize -2);
+                       } else if (maxNumMines == 20) {
+                           x = rand.nextInt(boardSize-3);
+                       }
+                   }
                    else {
-                       x = rand.nextInt(size-2);
+                       if (maxNumMines == 6)
+                           x = rand.nextInt(boardSize*2);
+                       else if (maxNumMines == 10) {
+                           x = rand.nextInt(boardSize+2);
+                       } else if (maxNumMines == 15) {
+                           x = rand.nextInt(boardSize-2);
+                       } else if (maxNumMines == 20) {
+                           x = rand.nextInt(boardSize-3);
+                       }
                    }
                    if (x == MINE && (numberOfMines < maxNumMines)) {
                        numberOfMines++;

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -19,6 +20,17 @@ public class OptionMenu extends AppCompatActivity {
         setupSizeOption();
         setupMineOption();
         int savedSize = getSize(this);
+        setupOkButton();
+    }
+
+    private void setupOkButton() {
+        Button ok = (Button) findViewById(R.id.okButton);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void setupMineOption() {
@@ -71,12 +83,12 @@ public class OptionMenu extends AppCompatActivity {
     private void saveSizeOption(int currentSize) {
         SharedPreferences pref = getSharedPreferences("AppData",MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putInt("size",currentSize);
+        editor.putInt("gameSize",currentSize);
         editor.apply();
     }
     public static int getSize(Context contex){
         SharedPreferences pref = contex.getSharedPreferences("AppData",MODE_PRIVATE);
-        return pref.getInt("size",Default_Val);
+        return pref.getInt("gameSize",Default_Val);
     }
 
     private void saveNumberOfMines(int NumMInes) {

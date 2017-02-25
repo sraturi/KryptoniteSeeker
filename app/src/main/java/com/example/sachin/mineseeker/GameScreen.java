@@ -3,6 +3,7 @@ package com.example.sachin.mineseeker;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,7 @@ public class GameScreen extends AppCompatActivity {
 
     private  int NumberOfMinesRevealed = 0;
     private int totalNumberOfScans = 0;
-    private MineSeeker minesSeeker = new MineSeeker();
+    private MineSeeker minesSeeker = new MineSeeker(MainMenu.gameSize,MainMenu.totalNumKryptonite);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,6 @@ public class GameScreen extends AppCompatActivity {
 
     private void populateButtons() {
         TableLayout buttonTable = (TableLayout) findViewById(R.id.buttonTable);
-
         for(int rows = 0; rows<minesSeeker.getRows();rows++){
             final int currentRow = rows;
             TableRow tableRow = new TableRow(this);
@@ -56,6 +56,7 @@ public class GameScreen extends AppCompatActivity {
             buttonTable.addView(tableRow);
             for(int cols = 0;cols<minesSeeker.getCols();cols++) {
                 final Button button = new Button(this);
+                button.setDrawingCacheBackgroundColor(Color.BLACK);
                 final int currentCol = cols;
                 button.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT, 1.0f));
@@ -70,26 +71,34 @@ public class GameScreen extends AppCompatActivity {
                     public void onClick(View v) {
                         Random rand = new Random();
                         lockButtonSizes();
-                        if(minesSeeker.getMineCellArray(currentRow,currentCol).isMine()) {
+                        if(minesSeeker.getMineCellArray(currentRow,currentCol).isOneTimeScanned()){
+                            totalNumberOfScans++;
+                            setupTotalScans();
+                            int totalMinesInColRow = minesSeeker.getTotalMinesInCol(currentCol) +
+                                    minesSeeker.getTotalMinesInRow(currentRow);
+                            button.setText(totalMinesInColRow+"");
+                            minesSeeker.getMineCellArray(currentRow,currentCol).setOneTimeScanned(false);
+
+                        }
+                        else if(minesSeeker.getMineCellArray(currentRow,currentCol).isMine()) {
                             if(minesSeeker.getMineCellArray(currentRow,currentCol).isMineHidden()) {
                                 setButtonSizeAndImage(button);
                                 NumberOfMinesRevealed++;
                                 setupMinesFound();
                                 minesSeeker.getMineCellArray(currentRow,currentCol).setIsMineHidden(false);
                                 resetbutton(currentRow,currentCol);
+                                minesSeeker.getMineCellArray(currentRow,currentCol).setOneTimeScanned(true);
+
                             }
                             if(NumberOfMinesRevealed ==minesSeeker.getNumberOfMines()){
                               setupWinScreen();
                             }
-                            if(minesSeeker.getMineCellArray(currentRow,currentCol).isMineRevealed()){
-                                totalNumberOfScans++;
-                                setupTotalScans();
-
-                            }
-                            else {
+                            else  {
                                 minesSeeker.getMineCellArray(currentRow,currentCol).setIsMineRevealed(true);
 
                             }
+
+
                         }
 
                         else if(!minesSeeker.getMineCellArray(currentRow,currentCol).isReavled()) {
@@ -100,6 +109,7 @@ public class GameScreen extends AppCompatActivity {
                             button.setText(totalMinesInColRow+"");
                         minesSeeker.getMineCellArray(currentRow,currentCol).setReavled(true);
                         }
+
                     }
                 });
             tableRow.addView(button);
@@ -124,7 +134,7 @@ public class GameScreen extends AppCompatActivity {
     private void setButtonSizeAndImage(Button button){
         int newWidth = button.getWidth();
         int newHeight = button.getHeight();
-        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mine);
+        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.krytonite);
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
         Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));

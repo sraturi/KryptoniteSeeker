@@ -13,7 +13,6 @@
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -23,9 +22,11 @@
         <activity
             android:name=".GameScreen"
             android:screenOrientation="landscape" />
-        <activity android:name=".OptionMenu"
-            android:screenOrientation="landscape"
-            ></activity>
+        <activity
+            android:name=".OptionMenu"
+            android:screenOrientation="landscape" />
+        <activity android:name=".HelpScreen"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

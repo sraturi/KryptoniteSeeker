@@ -12,12 +12,22 @@ public class Cell {
     private boolean isMine;
     private boolean isMineRevealed;
     private boolean isMineHidden;
+    private boolean oneTimeScanned;
     public Cell(){
         isReavled = false;
         isMine = false;
         isMineRevealed = false;
         cellNumber = 0;
         isMineHidden = true;
+        oneTimeScanned = false;
+    }
+
+    public boolean isOneTimeScanned() {
+        return oneTimeScanned;
+    }
+
+    public void setOneTimeScanned(boolean oneTimeScanned) {
+        this.oneTimeScanned = oneTimeScanned;
     }
 
     public boolean isMineHidden() {

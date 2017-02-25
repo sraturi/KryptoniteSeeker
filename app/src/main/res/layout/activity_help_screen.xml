@@ -21,53 +21,104 @@
         android:id="@+id/backButton" />
 
     <TextView
-        android:text="@string/GameInstruction2"
+        android:text="@string/gameObjective"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView9"
-        android:layout_above="@+id/gameObjectiveQ"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="22dp" />
-
-    <TextView
-        android:text="@string/gameInstruction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView10"
-        android:layout_marginBottom="33dp"
-        android:layout_above="@+id/textView9"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="27dp"
-        android:layout_marginStart="27dp"
-        android:id="@+id/gameObjectiveQ"
-        android:layout_above="@+id/backButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="79dp" />
+        android:id="@+id/gameObj"
+        android:textStyle="normal|bold"
+        android:textSize="18sp" />
 
     <TextView
         android:text="@string/gameObjectiveValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gameObj"
-        android:layout_above="@+id/textView10"
+        android:id="@+id/gameObj1"
+        android:layout_below="@+id/gameObj"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="18dp" />
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp" />
+
+    <TextView
+        android:text="@string/gameInstruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gameObj1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp"
+        android:id="@+id/gameInstruction"
+        android:textStyle="normal|bold"
+        android:textSize="18sp" />
 
     <TextView
         android:text="@string/GameInstructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView8"
-        android:layout_below="@+id/textView10"
+        android:layout_below="@+id/gameInstruction"
+        android:layout_alignLeft="@+id/gameObj1"
+        android:layout_alignStart="@+id/gameObj1"
+        android:id="@+id/gameIns"
+        android:textSize="14sp" />
+
+    <TextView
+        android:text="@string/GameInstruction2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gameIns"
+        android:layout_alignLeft="@+id/gameIns"
+        android:layout_alignStart="@+id/gameIns"
+        android:id="@+id/gameIns1" />
+
+    <TextView
+        android:text="@string/resourses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/resourse"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/gameIns1"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="19dp" />
+
+    <TextView
+        android:text="@string/r1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/r1"
+        android:layout_below="@+id/resourse"
+        android:layout_alignLeft="@+id/gameIns1"
+        android:layout_alignStart="@+id/gameIns1" />
+
+    <TextView
+        android:text="@string/r2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/r2"
+        android:layout_below="@+id/r1"
+        android:layout_alignLeft="@+id/r1"
+        android:layout_alignStart="@+id/r1" />
+
+    <TextView
+        android:text="@string/r3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/r3"
+        android:layout_below="@+id/r2"
+        android:layout_alignLeft="@+id/r2"
+        android:layout_alignStart="@+id/r2" />
+
+    <TextView
+        android:text="@string/r4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/r4"
+        android:layout_below="@+id/r3"
+        android:layout_alignLeft="@+id/r3"
+        android:layout_alignStart="@+id/r3" />
+
 </RelativeLayout>
