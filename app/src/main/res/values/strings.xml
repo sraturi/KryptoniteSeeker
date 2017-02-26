@@ -5,9 +5,9 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="gameObjective">GAME OBJECTIVE</string>
-    <string name="gameObjectiveValue">Superman has gone rogue! It is up to BATMAN to stop SuperMan. However he needs your help finding the Kryptonite first!!</string>
-    <string name="GameInstructions">Clicking on a Cell will either reveal Krytonite or a number that states the number of kryptonite in the row and column.</string>
-    <string name="GameInstruction2">Find all the Kryptonite with as few scans as Possible.</string>
+    <string name="gameObjectiveValue">Superman has gone rogue! It is up to BATMAN to stop Superman. However he needs your help finding the Kryptonite first!!</string>
+    <string name="GameInstructions">Clicking on a Cell will either reveal a Krytonite or a number of kryptonites in the row and column of the cell.</string>
+    <string name="GameInstruction2">Find all the Kryptonites with as few scans as Possible.</string>
     <string name="gameInstruction">Game Instructions</string>
     <string name="back">BACK</string>
     <string name="resourses">RESOURCES</string>
@@ -16,4 +16,12 @@
     <string name="r3">Kryptonite: http://www.free-icons-download.net/green-gem-icon-14292/</string>
     <string name="r4">Batman Logo:  https://in.pinterest.com/explore/batman-logo-png/</string>
     <string name="ok">OK</string>
+    <string name="numPlanets">HOW MANY PLANETS?</string>
+    <string name="numKrypt">HOW MANY KRYPTONITES?</string>
+    <string name="winText">CONGRATULATIONS! BATMAN WILL BE PROUD</string>
+    <string name="numGamesPLayed">Total Games Played:</string>
+    <string name="resetbutton">RESET GAMES PLAYED</string>
+    <string name="r5">Planet : http://wfarm3.dataknet.com/static/resources/icons/set40/eb991bd7.png</string>
+    <string name="finalScan" />
+    <string name="r6">Planet 2: http://ckandromeda.sk/wp-content/uploads/2016/09/Mars-1-.png</string>
 </resources>

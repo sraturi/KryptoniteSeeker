@@ -1,10 +1,13 @@
 package com.example.sachin.mineseeker;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Vibrator;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,17 +16,15 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
 import java.util.Random;
-
-import static android.R.attr.button;
 
 public class GameScreen extends AppCompatActivity {
 
     private  int NumberOfMinesRevealed = 0;
     private int totalNumberOfScans = 0;
     private MineSeeker minesSeeker = new MineSeeker(MainMenu.gameSize,MainMenu.totalNumKryptonite);
-
+    private int numGamesPlayed;
+    private MineSeeker m = minesSeeker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,17 +32,27 @@ public class GameScreen extends AppCompatActivity {
         populateButtons();
         setupTotalScans();
         setupMinesFound();
+        setupTotalGamesPlayed();
+        numGamesPlayed = getNumGamesPlayed(this);
+        numGamesPlayed++;
+        saveNumGamesPlayed(numGamesPlayed);
+        setupTotalGamesPlayed();
+    }
+
+    public void setupTotalGamesPlayed() {
+        TextView totalGames = (TextView)findViewById(R.id.numGamesPlayed);
+        totalGames.setText("Total Games Played: "+ numGamesPlayed);
     }
 
     private void setupMinesFound() {
         TextView totalMines = (TextView) findViewById(R.id.numMinesFound);
-        totalMines.setText("Mines Found "+ NumberOfMinesRevealed+"/" +minesSeeker.getNumberOfMines());
+        totalMines.setText("Kryptonite Found "+ NumberOfMinesRevealed+"/" +minesSeeker.getNumberOfMines());
 
     }
 
     private void setupTotalScans() {
         TextView totalNumScans = (TextView) findViewById(R.id.totalNumScans);
-        totalNumScans.setText("Number Of Scans: "+ totalNumberOfScans+"");
+        totalNumScans.setText("Total Planet Scanned: "+ totalNumberOfScans+"");
     }
 
 
@@ -55,12 +66,17 @@ public class GameScreen extends AppCompatActivity {
                     TableLayout.LayoutParams.MATCH_PARENT,1.0f));
             buttonTable.addView(tableRow);
             for(int cols = 0;cols<minesSeeker.getCols();cols++) {
+                Random r = new Random();
+
                 final Button button = new Button(this);
-                button.setDrawingCacheBackgroundColor(Color.BLACK);
+                if(r.nextBoolean())
+                button.setBackgroundResource(R.drawable.rsz_nept);
+                else{
+                    button.setBackgroundResource(R.drawable.rsz_marsss);
+                }
                 final int currentCol = cols;
                 button.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT, 1.0f));
-
                 if(minesSeeker.getMineCellArray(rows,cols).getCellNumber() == 1){
                     minesSeeker.getMineCellArray(rows,cols).setIsMine(true);
                 }
@@ -91,14 +107,18 @@ public class GameScreen extends AppCompatActivity {
 
                             }
                             if(NumberOfMinesRevealed ==minesSeeker.getNumberOfMines()){
+                             Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                                vib.vibrate(1000);
                               setupWinScreen();
                             }
-                            else  {
-                                minesSeeker.getMineCellArray(currentRow,currentCol).setIsMineRevealed(true);
+                            else {
+                                minesSeeker.getMineCellArray(currentRow, currentCol).setIsMineRevealed(true);
+                                if (minesSeeker.getMineCellArray(currentRow, currentCol).isOneTimeScanned()) {
+                                    Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                                    vib.vibrate(new long[]{0, 50, 60}, -1);
+                                }
 
                             }
-
-
                         }
 
                         else if(!minesSeeker.getMineCellArray(currentRow,currentCol).isReavled()) {
@@ -166,5 +186,23 @@ private void resetbutton(int row, int col){
         }
     }
 }
+
+    private void saveNumGamesPlayed(int currentSize) {
+        SharedPreferences pref = getSharedPreferences("AppData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("numGamesPlayed", currentSize);
+        editor.apply();
+    }
+    public static void removeNumGamesPlayed(Context context) {
+        SharedPreferences pref = context.getSharedPreferences("AppData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("numGamesPlayed",0);
+        editor.apply();
+    }
+
+    private int getNumGamesPlayed(Context contex) {
+        SharedPreferences pref = contex.getSharedPreferences("AppData", MODE_PRIVATE);
+        return pref.getInt("numGamesPlayed",0);
+    }
 }
 

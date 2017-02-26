@@ -18,15 +18,27 @@
         android:layout_alignParentTop="true" />
 
     <TextView
-        android:text="CONGRATULATIONS YOU FOUND THEM ALL!!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView4"
         android:textSize="36sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/black_overlay"
         android:textStyle="normal|bold"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:text="@string/winText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/finalScoreText"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:text="hbjkjhvkvj,v"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="106dp"
+        android:textColor="@android:color/holo_blue_dark" />
 
 </RelativeLayout>

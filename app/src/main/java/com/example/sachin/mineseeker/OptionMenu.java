@@ -3,6 +3,7 @@ package com.example.sachin.mineseeker;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Path;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,13 +20,25 @@ public class OptionMenu extends AppCompatActivity {
         setContentView(R.layout.activity_option_menu);
         setupSizeOption();
         setupMineOption();
-        int savedSize = getSize(this);
+        int savedSize = getGameSize(this);
         setupOkButton();
+        setupResetButton();
+    }
+
+    private void setupResetButton() {
+        Button reset = (Button) findViewById(R.id.resetButton);
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GameScreen.removeNumGamesPlayed(OptionMenu.this);
+            }
+        });
     }
 
     private void setupOkButton() {
         Button ok = (Button) findViewById(R.id.okButton);
-        ok.setOnClickListener(new View.OnClickListener() {
+        ok.setOnClickListener(
+                new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -39,7 +52,7 @@ public class OptionMenu extends AppCompatActivity {
         for (int i =0; i<sizeList.length;i++) {
         RadioButton rButton = new RadioButton(this);
             final int numMines = sizeList[i];
-        rButton.setText(sizeList[i]+ " Cell");
+        rButton.setText(sizeList[i]+ " Kryptomite");
             rButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -61,32 +74,32 @@ public class OptionMenu extends AppCompatActivity {
             final int currentSize = sizeList[i];
             RadioButton rButton = new RadioButton(this);
             if(currentSize == 4)
-            rButton.setText(currentSize+" x "+ 6 );
+            rButton.setText(currentSize+" x "+ 6 +" Planets");
             else if (currentSize == 5)
-                rButton.setText(currentSize+" x "+10);
+                rButton.setText(currentSize+" x "+10+" Planets");
             else if (currentSize == 6)
-                rButton.setText(currentSize+" x "+ 15);
+                rButton.setText(currentSize+" x "+ 15+" Planets");
             rButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    saveSizeOption(currentSize);
+                    saveGameSizeOption(currentSize);
                 }
             });
 
             sizeRadioGroup.addView(rButton);
-            if(getSize(this)==currentSize){
+            if(getGameSize(this)==currentSize){
                 rButton.setChecked(true);
             }
         }
     }
 
-    private void saveSizeOption(int currentSize) {
+    private void saveGameSizeOption(int currentSize) {
         SharedPreferences pref = getSharedPreferences("AppData",MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt("gameSize",currentSize);
         editor.apply();
     }
-    public static int getSize(Context contex){
+    public static int getGameSize(Context contex){
         SharedPreferences pref = contex.getSharedPreferences("AppData",MODE_PRIVATE);
         return pref.getInt("gameSize",Default_Val);
     }

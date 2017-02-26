@@ -15,6 +15,9 @@ import java.util.Random;
 
 
 public class MineSeeker {
+    private final int FOURbySIX = 4;
+    private final int FIVEbyTEN = 5;
+    private final int SIXbyFIFTEEN = 6;
     private final  int MINE =1;
     private final int NOT_MINE = 0;
     private static Button MineButtonArray[][];
@@ -27,15 +30,15 @@ public class MineSeeker {
     public MineSeeker(int gameSize, int numMines){
        int boardSize = gameSize;
         int maxNumMines = numMines;
-        if(boardSize == 4){
+        if(boardSize == FOURbySIX){
             rows = 4;
             cols = 6;
         }
-        else if(boardSize == 5){
+        else if(boardSize == FIVEbyTEN){
             rows = 5;
             cols = 10;
         }
-        else if (boardSize == 6){
+        else if (boardSize == SIXbyFIFTEEN){
             rows = 6;
             cols = 15;
         }
@@ -51,7 +54,7 @@ public class MineSeeker {
                    Cell mine = new Cell();
                    MineCellArray[i][j] = mine;
                    int x = NOT_MINE;
-                   if (boardSize == 4){
+                   if (boardSize == FOURbySIX){
                        if (maxNumMines == 6)
                            x = rand.nextInt(boardSize);
                        else if (maxNumMines == 10) {
@@ -69,7 +72,7 @@ public class MineSeeker {
                        }
                    }
 
-                   else if (boardSize == 5) {
+                   else if (boardSize == FIVEbyTEN) {
                        if (maxNumMines == 6)
                            x = rand.nextInt(boardSize+2);
                        else if (maxNumMines == 10) {
@@ -80,7 +83,7 @@ public class MineSeeker {
                            x = rand.nextInt(boardSize-3);
                        }
                    }
-                   else {
+                   else if (boardSize == SIXbyFIFTEEN){
                        if (maxNumMines == 6)
                            x = rand.nextInt(boardSize*2);
                        else if (maxNumMines == 10) {

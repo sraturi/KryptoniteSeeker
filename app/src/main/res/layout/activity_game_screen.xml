@@ -38,8 +38,8 @@
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="103dp"
-        android:layout_marginEnd="103dp"
+        android:layout_marginRight="66dp"
+        android:layout_marginEnd="66dp"
         android:id="@+id/numMinesFound"
         android:textStyle="normal|bold"
         android:textColor="@color/colorAccent"
@@ -47,5 +47,17 @@
         android:layout_alignBottom="@+id/totalNumScans"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="@string/numGamesPLayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="52dp"
+        android:layout_marginEnd="52dp"
+        android:id="@+id/numGamesPlayed"
+        android:textColor="@android:color/holo_blue_light"
+        android:layout_below="@+id/buttonTable"
+        android:layout_toLeftOf="@+id/numMinesFound"
+        android:layout_toStartOf="@+id/numMinesFound" />
 
 </RelativeLayout>

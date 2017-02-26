@@ -10,14 +10,12 @@ import android.widget.Button;
 public class MainMenu extends AppCompatActivity {
     public static int gameSize = 0;
     public static int totalNumKryptonite = 0;
-    public static int numGamesPlayed = 0;
-
     private void getNumberOfMines() {
         totalNumKryptonite = OptionMenu.getNumMInes(this);
     }
 
-    private void getSize() {
-        gameSize = OptionMenu.getSize(this);
+    private void getGameSize() {
+        gameSize = OptionMenu.getGameSize(this);
 
     }
 
@@ -31,10 +29,8 @@ public class MainMenu extends AppCompatActivity {
         OnButtonClick(R.id.newGameButton, newGameIntent);
         OnButtonClick(R.id.optionButton, optionIntent);
         OnButtonClick(R.id.helpButton,helpIntent);
-        getSize();
+        getGameSize();
         getNumberOfMines();
-        numGamesPlayed = getNumGamesPlayed();
-        saveNumGamesPlayed(numGamesPlayed);
     }
 
     private void OnButtonClick(final int buttonId, final Intent intent) {
@@ -42,9 +38,6 @@ public class MainMenu extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(buttonId == R.id.newGameButton){
-                    numGamesPlayed++;
-                }
                 startActivity(intent);
             }
         });
@@ -53,19 +46,9 @@ public class MainMenu extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getSize();
+        getGameSize();
         getNumberOfMines();
     }
 
-    private void saveNumGamesPlayed(int currentSize) {
-        SharedPreferences pref = getSharedPreferences("AppData", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putInt("numGamesPlayed", currentSize);
-        editor.apply();
-    }
 
-    private int getNumGamesPlayed() {
-        SharedPreferences pref = getSharedPreferences("AppData", MODE_PRIVATE);
-        return pref.getInt("numGamesPlayed", 0);
-    }
 }

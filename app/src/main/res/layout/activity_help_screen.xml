@@ -121,4 +121,22 @@
         android:layout_alignLeft="@+id/r3"
         android:layout_alignStart="@+id/r3" />
 
+    <TextView
+        android:text="@string/r5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/r4"
+        android:layout_alignLeft="@+id/r4"
+        android:layout_alignStart="@+id/r4"
+        android:id="@+id/r5" />
+
+    <TextView
+        android:text="@string/r6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/r5"
+        android:layout_alignLeft="@+id/r5"
+        android:layout_alignStart="@+id/r5"
+        android:id="@+id/r6" />
+
 </RelativeLayout>
