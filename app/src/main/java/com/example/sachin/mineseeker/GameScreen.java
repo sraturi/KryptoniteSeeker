@@ -39,6 +39,7 @@ public class GameScreen extends AppCompatActivity {
         setupTotalGamesPlayed();
     }
 
+
     public void setupTotalGamesPlayed() {
         TextView totalGames = (TextView)findViewById(R.id.numGamesPlayed);
         totalGames.setText("Total Games Played: "+ numGamesPlayed);

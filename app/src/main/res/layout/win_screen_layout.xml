@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/krytonite"
+        app:srcCompat="@drawable/welcome_screen_logo"
         android:id="@+id/imageView"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -35,7 +35,6 @@
         android:id="@+id/finalScoreText"
         android:textSize="24sp"
         android:textStyle="normal|bold"
-        android:text="hbjkjhvkvj,v"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="106dp"

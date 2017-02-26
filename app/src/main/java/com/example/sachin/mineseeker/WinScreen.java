@@ -29,7 +29,7 @@ public class WinScreen extends AppCompatDialogFragment {
                 getActivity().finish();
             }
         };
-                return new AlertDialog.Builder(getActivity()).setTitle("").setView(v)
+                return new AlertDialog.Builder(getActivity()).setView(v)
                         .setPositiveButton(android.R.string.ok,listener).create();
     }
 
